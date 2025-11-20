@@ -1,16 +1,169 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+#  SkillSphere – Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Modern Online Learning Platform (React + Vite + Tailwind CSS)
 
-## React Compiler
+SkillSphere Frontend is a fully functional online learning web application inspired by **Udemy, Coursera, and Skillshare**.
+Users can browse courses, watch lessons, take quizzes, track progress, earn certificates, and manage enrolled courses.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+##  Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+###  User Features
+
+*  **Authentication** (Signup / Login)
+*  **Browse All Courses**
+*  **Video Lesson Player**
+*  **Progress Tracking**
+*  **Course Quiz System**
+*  **Certificate Generation**
+*  **Stripe Payment Checkout**
+*  **My Courses Dashboard** (Paid Courses Only)
+
+---
+
+##  Tech Stack
+
+| Layer              | Technology      |
+| ------------------ | --------------- |
+| Frontend Framework | React + Vite    |
+| Styling            | Tailwind CSS    |
+| State + Routing    | React Router    |
+| API Calls          | Axios           |
+| Animations         | Canvas Confetti |
+| Deployment         | Vercel          |
+
+---
+
+##  Folder Structure
+
+```
+frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── CourseCard.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── ProgressBar.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   └── StripeButton.jsx
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Courses.jsx
+│   │   ├── CourseDetails.jsx
+│   │   ├── CoursePlayer.jsx
+│   │   ├── QuizPage.jsx
+│   │   ├── MyCourses.jsx
+│   │   ├── Certificate.jsx
+│   │   ├── Login.jsx
+│   │   ├── Signup.jsx
+│   │   ├── About.jsx
+│   │   ├── Instructors.jsx
+│   │   ├── PaymentSuccess.jsx
+│   │   └── PaymentCancel.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── package.json
+└── vite.config.js
+```
+
+---
+
+##  Installation & Setup
+
+###  Clone the repo
+
+```
+git clone https://github.com/<your-username>/<your-frontend-repo>.git
+cd frontend
+```
+
+###  Install dependencies
+
+```
+npm install
+```
+
+###  Configure environment
+
+Create a **.env** file in the root:
+
+```
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+###  Start development server
+
+```
+npm run dev
+```
+
+Your app will run at:
+  [http://localhost:5173](http://localhost:5173)
+
+---
+
+##  Backend Integration
+
+The frontend interacts with backend APIs:
+
+| Feature          | Endpoint                             |
+| ---------------- | ------------------------------------ |
+| Login            | POST /auth/login                     |
+| Signup           | POST /auth/signup                    |
+| Course List      | GET /courses                         |
+| Lessons          | GET /lessons/:courseId               |
+| Progress         | POST /progress/update                |
+| Quiz             | GET /quiz/:courseId                  |
+| Certificate      | GET /certificates/:userId            |
+| Payment Checkout | POST /stripe/create-checkout-session |
+
+Be sure your backend is running before using the frontend.
+
+---
+
+##  Deployment on Vercel
+
+### Push the frontend repo to GitHub
+
+###  Go to  [https://vercel.com](https://vercel.com)
+
+### Import GitHub Repository
+
+### Add Environment Variable:
+
+```
+VITE_BACKEND_URL=https://your-render-backend-url
+```
+
+### Deployed 
+
+---
+
+## Screenshots (Add Your Own)
+
+You can add images like:
+
+```
+![Home Page](./screenshots/home.png)
+![Course Player](./screenshots/player.png)
+```
+
+---
+
+##  Contributing
+
+Feel free to fork this repository and submit pull requests.
+
+---
+
+## 📄 License
+
+This project is **MIT Licensed** — free to use and modify.
+
+
