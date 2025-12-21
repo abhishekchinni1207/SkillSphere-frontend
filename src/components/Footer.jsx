@@ -24,35 +24,36 @@ export default function Footer() {
           </h4>
           <ul className="space-y-2">
             <li>
-              <link
+              <Link
                 to="/courses"
                 className="hover:text-pink-600 transition-all"
               >
                 🎓 Courses
-              </link>
+              </Link>
             </li>
             <li>
-              <link
+              <Link         
                 to="/about"
                 className="hover:text-pink-600 transition-all"
               >
                 💡 About Us
-              </link>
+              </Link>
             </li>
             <li>
-              <link
+              <Link
                 to="/instructors"
                 className="hover:text-pink-600 transition-all"
               >
                 👩‍🏫 Instructors
-              </link>
+              </Link>
             </li>
             <li>
-              <link
+              <Link
+                to="/contact"
                 className="hover:text-pink-600 transition-all"
               >
                 📞 Contact
-              </link>
+              </Link>
             </li>
           </ul>
         </div>

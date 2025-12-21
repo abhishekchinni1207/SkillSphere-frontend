@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 //  Pages
 import Home from "./pages/Home";
@@ -90,12 +90,12 @@ export default function App() {
                 <p className="text-gray-600 mb-6">
                   Oops! The page you’re looking for doesn’t exist.
                 </p>
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
                 >
                   Go Home
-                </a>
+                </Link>
               </div>
             }
           />
