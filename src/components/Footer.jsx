@@ -64,24 +64,24 @@ export default function Footer() {
             Follow Us
           </h4>
           <div className="flex justify-center sm:justify-start space-x-5">
-            <link
+            <Link
               to="#"
               className="bg-blue-100 text-blue-700 p-2 rounded-full hover:bg-blue-200 transition"
             >
               <i className="fab fa-twitter text-lg"></i>
-            </link>
-            <link
+            </Link>
+            <Link
               to="#"
               className="bg-pink-100 text-pink-700 p-2 rounded-full hover:bg-pink-200 transition"
             >
               <i className="fab fa-linkedin text-lg"></i>
-            </link>
-            <link
+            </Link>
+            <Link
               to="#"
               className="bg-yellow-100 text-yellow-700 p-2 rounded-full hover:bg-yellow-200 transition"
             >
               <i className="fab fa-youtube text-lg"></i>
-            </link>
+            </Link>
           </div>
         </div>
       </div>
