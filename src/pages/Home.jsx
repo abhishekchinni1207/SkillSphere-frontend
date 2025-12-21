@@ -1,35 +1,29 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
 
 export default function Home() {
-  const courses = [
-    {
-      id: 1,
-      title: "Mastering Web Development",
-      description:
-        "Learn HTML, CSS, JS, React & more to become a full-stack developer.",
-      instructor: "Jane Doe",
-      image:
-        "https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 2,
-      title: "UI/UX Design Fundamentals",
-      description:
-        "Understand design thinking, wireframing, and user testing.",
-      instructor: "John Smith",
-      image:
-        "https://images.unsplash.com/photo-1587614382346-ac7e28f06b9e?auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 3,
-      title: "Data Science with Python",
-      description:
-        "Hands-on projects using Pandas, NumPy, and machine learning models.",
-      instructor: "Sarah Lee",
-      image:
-        "https://images.unsplash.com/photo-1581091012184-5c4a7d3f8d3a?auto=format&fit=crop&w=800&q=60",
-    },
-  ];
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    const fetchPopularCourses = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/courses`);
+        // Show only top 3 courses as "Popular"
+        setCourses((res.data || []).slice(0, 3));
+      } catch (err) {
+        console.error("Error fetching popular courses:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPopularCourses();
+  }, [API_BASE_URL]);
 
   return (
     <main>
@@ -38,18 +32,19 @@ export default function Home() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')] opacity-10"></div>
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-blue-800 drop-shadow-sm">
-            Learn. Create. Succeed. 💡 <br /> With <span className="text-pink-600">SkillSphere</span>
+            Learn. Create. Succeed. 💡 <br />
+            With <span className="text-pink-600">SkillSphere</span>
           </h1>
           <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto">
             Explore expert-led courses designed to help you master new skills
             and reach your career goals.
           </p>
-          <a
-            href="/courses"
+          <Link
+            to="/courses"
             className="bg-gradient-to-r from-blue-600 to-pink-500 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:from-pink-500 hover:to-blue-600 transition-all duration-300"
           >
             Explore Courses 🚀
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -59,11 +54,22 @@ export default function Home() {
           <h2 className="text-4xl font-extrabold text-center text-blue-800 mb-12">
             🌟 Popular Courses
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
-          </div>
+
+          {loading ? (
+            <div className="flex justify-center">
+              <div className="animate-spin h-12 w-12 border-b-4 border-blue-600 rounded-full"></div>
+            </div>
+          ) : courses.length === 0 ? (
+            <p className="text-center text-gray-600 text-lg">
+              No courses available yet.
+            </p>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+              {courses.map((course) => (
+                <CourseCard key={course.id} course={course} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -100,7 +106,9 @@ export default function Home() {
                   alt={instructor.name}
                   className="w-32 h-32 mx-auto rounded-full object-cover border-4 border-white shadow-lg mb-4"
                 />
-                <h3 className="text-xl font-semibold text-blue-700">{instructor.name}</h3>
+                <h3 className="text-xl font-semibold text-blue-700">
+                  {instructor.name}
+                </h3>
                 <p className="text-gray-600">{instructor.title}</p>
               </div>
             ))}
@@ -118,17 +126,17 @@ export default function Home() {
             {[
               {
                 quote:
-                  "SkillSphere helped me land my first web development job! The instructors were amazing.",
+                  "SkillSphere helped me land my first web development job!",
                 name: "Rahul Sharma",
               },
               {
                 quote:
-                  "I loved the interactive UI/UX course! The lessons were easy to follow and engaging.",
+                  "The UI/UX course was amazing and very interactive.",
                 name: "Priya Verma",
               },
               {
                 quote:
-                  "The data science projects gave me real-world experience. Highly recommend this platform!",
+                  "Real-world projects made learning fun and practical.",
                 name: "Ankit Kumar",
               },
             ].map((t, i) => (
@@ -136,9 +144,7 @@ export default function Home() {
                 key={i}
                 className="bg-white text-gray-800 rounded-2xl p-8 shadow-md hover:shadow-lg transition-all duration-300"
               >
-                <p className="italic mb-4 text-gray-700 leading-relaxed">
-                  “{t.quote}”
-                </p>
+                <p className="italic mb-4 text-gray-700">“{t.quote}”</p>
                 <h4 className="font-bold text-pink-600">{t.name}</h4>
               </div>
             ))}

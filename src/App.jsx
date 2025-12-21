@@ -35,16 +35,9 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/payment-cancel" element={<PaymentCancel />} />
+          <Route path="/courses" element={<Courses />} />
 
-         
-          <Route
-            path="/courses"
-            element={
-              <ProtectedRoute>
-                <Courses />
-              </ProtectedRoute>
-            }
-          />
+
           <Route
             path="/courses/:id"
             element={

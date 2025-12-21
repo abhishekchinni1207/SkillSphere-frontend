@@ -13,6 +13,8 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("session");
+
+    setUser(null); // ✅ IMPORTANT FIX
     navigate("/login");
   };
 

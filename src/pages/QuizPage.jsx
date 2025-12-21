@@ -9,21 +9,29 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState({});
   const [score, setScore] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   useEffect(() => {
-    axios.get(`http://localhost:5000/quiz/${id}`).then((res) => {
-      setQuestions(res.data);
-      setLoading(false);
-    });
-  }, [id]);
+  axios.get(`${API_BASE_URL}/quiz/${id}`).then((res) => {
+    setQuestions(res.data);
+    setLoading(false);
+  });
+}, [id, API_BASE_URL]);
 
-  const handleSubmit = async () => {
-    const res = await axios.post("http://localhost:5000/quiz/submit", {
-      answers: Object.values(answers),
-      courseId: id,
-    });
-    setScore(res.data.score);
-  };
+
+const handleSubmit = async () => {
+  if (Object.keys(answers).length !== questions.length) {
+    alert("Please answer all questions before submitting.");
+    return;
+  }
+
+  const res = await axios.post(`${API_BASE_URL}/quiz/submit`, {
+    answers: Object.values(answers),
+    courseId: id,
+  });
+
+  setScore(res.data.score);
+};
+
 
   if (loading)
     return (
@@ -53,15 +61,17 @@ export default function QuizPage() {
         )}
 
         {/* ⭐ Redirect to certificate instead of My Courses */}
-        <button
-          onClick={() => navigate(`/certificate/${id}`)}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-        >
-          View Certificate 🎓
-        </button>
+{score >= 70 && (
+  <button
+    onClick={() => navigate(`/certificate/${id}`)}
+    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+  >
+    View Certificate 🎓
+  </button>
+)}
+
       </div>
     );
-
   // ============================
   //     QUIZ FORM SCREEN
   // ============================

@@ -6,13 +6,14 @@ export default function MyCourses() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     if (!user) return;
 
     const fetchCourses = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/my-courses/${user.id}`);
+        const res = await axios.get(`${API_BASE_URL}/my-courses/${user.id}`);
         setCourses(res.data || []);
       } catch (err) {
         console.error("Error fetching enrolled courses:", err);
@@ -22,7 +23,7 @@ export default function MyCourses() {
     };
 
     fetchCourses();
-  }, [user]);
+  }, [user, API_BASE_URL]);
 
   if (loading)
     return (
@@ -55,11 +56,12 @@ export default function MyCourses() {
                 <img
                   src={
                     course.image_url ||
-                    "https://placeholder.co/400x250?text=Course+Image"
+                    "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=60"
                   }
                   alt={course.title}
                   className="w-full h-48 object-cover"
                 />
+
                 <div className="p-5">
                   <h3 className="text-xl font-bold text-gray-800 mb-1">
                     {course.title}
@@ -67,8 +69,10 @@ export default function MyCourses() {
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {course.description}
                   </p>
+
+                  {/* ✅ FIXED ROUTE */}
                   <Link
-                    to={`/course/${course.id}`}
+                    to={`/course-player/${course.id}`}
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
                   >
                     Continue Learning →

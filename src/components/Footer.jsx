@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="bg-gradient-to-r from-blue-50 via-pink-50 to-yellow-50 text-gray-700 pt-14 pb-8 mt-20 border-t border-pink-100">
@@ -22,36 +24,35 @@ export default function Footer() {
           </h4>
           <ul className="space-y-2">
             <li>
-              <a
-                href="/courses"
+              <link
+                to="/courses"
                 className="hover:text-pink-600 transition-all"
               >
                 🎓 Courses
-              </a>
+              </link>
             </li>
             <li>
-              <a
-                href="/about"
+              <link
+                to="/about"
                 className="hover:text-pink-600 transition-all"
               >
                 💡 About Us
-              </a>
+              </link>
             </li>
             <li>
-              <a
-                href="/instructors"
+              <link
+                to="/instructors"
                 className="hover:text-pink-600 transition-all"
               >
                 👩‍🏫 Instructors
-              </a>
+              </link>
             </li>
             <li>
-              <a
-                href="/contact"
+              <link
                 className="hover:text-pink-600 transition-all"
               >
                 📞 Contact
-              </a>
+              </link>
             </li>
           </ul>
         </div>
@@ -62,24 +63,24 @@ export default function Footer() {
             Follow Us
           </h4>
           <div className="flex justify-center sm:justify-start space-x-5">
-            <a
-              href="#"
+            <link
+              to="#"
               className="bg-blue-100 text-blue-700 p-2 rounded-full hover:bg-blue-200 transition"
             >
               <i className="fab fa-twitter text-lg"></i>
-            </a>
-            <a
-              href="#"
+            </link>
+            <link
+              to="#"
               className="bg-pink-100 text-pink-700 p-2 rounded-full hover:bg-pink-200 transition"
             >
               <i className="fab fa-linkedin text-lg"></i>
-            </a>
-            <a
-              href="#"
+            </link>
+            <link
+              to="#"
               className="bg-yellow-100 text-yellow-700 p-2 rounded-full hover:bg-yellow-200 transition"
             >
               <i className="fab fa-youtube text-lg"></i>
-            </a>
+            </link>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 export default function StripeButton({ courseId, amount, onSuccess }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const [loading, setLoading] = useState(false);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   const handleCheckout = async () => {
     if (!user) {
       alert("Please log in before purchasing a course.");
@@ -15,7 +15,7 @@ export default function StripeButton({ courseId, amount, onSuccess }) {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/stripe/create-checkout-session", {
+      const res = await axios.post(`${API_BASE_URL}/stripe/create-checkout-session`, {
         courseId,
         amount,
         userId: user.id,

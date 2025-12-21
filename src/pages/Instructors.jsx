@@ -104,8 +104,8 @@ export default function Instructors() {
           <p className="text-blue-50 mb-6">
             Join our growing community of passionate educators and reach learners worldwide.
           </p>
-          <a
-            href="/contact"
+         <a href="mailto:support@skillsphere.com"
+
             className="bg-white text-blue-700 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-100 transition"
           >
             Become an Instructor ✨

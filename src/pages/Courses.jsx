@@ -5,20 +5,22 @@ import { Link } from "react-router-dom";
 export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/courses");
-        setCourses(res.data || []);
-      } catch (err) {
-        console.error("Error fetching courses:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCourses();
-  }, []);
+  const fetchCourses = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/courses`);
+      setCourses(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      console.error("Error fetching courses:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchCourses();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
 
   if (loading)
     return (
@@ -81,9 +83,9 @@ export default function Courses() {
                     <p className="text-sm text-gray-600 font-medium">
                       👨‍🏫 {course.instructor}
                     </p>
-                    <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold px-3 py-1.5 rounded-lg shadow-md hover:from-pink-500 hover:to-pink-600 transition-all duration-300">
+                    <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold px-3 py-1.5 rounded-lg shadow-md hover:from-pink-500 hover:to-pink-600 transition-all duration-300">
                       View →
-                    </button>
+                    </span>
                   </div>
                 </div>
               </Link>
