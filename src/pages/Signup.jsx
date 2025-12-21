@@ -34,7 +34,7 @@ export default function Signup() {
       });
 
       if (res.data?.user) {
-        alert("🎉 Signup successful! Please log in.");
+        window.dispatchEvent(new Event("storage"));
         navigate("/login");
       } else {
         setError("Signup failed. Please try again.");

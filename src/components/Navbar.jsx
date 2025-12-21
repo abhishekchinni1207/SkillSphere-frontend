@@ -5,14 +5,22 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
-  }, []);
+useEffect(() => {
+  const syncUser = () => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  };
+
+  syncUser();
+  window.addEventListener("storage", syncUser);
+
+  return () => window.removeEventListener("storage", syncUser);
+}, []);
+
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("session");
+    window.dispatchEvent(new Event("storage"));
 
     setUser(null); // ✅ IMPORTANT FIX
     navigate("/login");

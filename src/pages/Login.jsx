@@ -22,7 +22,7 @@ export default function Login() {
       if (res.data.user) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("session", JSON.stringify(res.data.session));
-        alert("🎉 Login successful!");
+        window.dispatchEvent(new Event("storage"));
         navigate("/courses");
       }
     } catch (err) {
